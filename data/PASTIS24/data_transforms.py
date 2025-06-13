@@ -217,7 +217,7 @@ class TileDates(object):
     
     def repeat(self, tensor, binned=False):
         if binned:
-            out = tensor.unsqueeze(1).unsqueeze(1).repeat(1, self.H, self.W, 1)#.permute(0, 2, 3, 1)
+            out = tensor.unsqueeze(1).unsqueeze(1).repeat(1, self.H, self.W, 1)  #.permute(0, 2, 3, 1)
         else:
             out = tensor.repeat(1, self.H, self.W, 1).permute(3, 0, 1, 2)
         return out
@@ -283,6 +283,7 @@ class CutOrPad(object):
         seq_len = tensor.shape[0]
         diff = self.max_seq_len - seq_len
         if diff > 0:
+            # Pad
             tsize = list(tensor.shape)
             if len(tsize) == 1:
                 pad_shape = [diff]
@@ -290,6 +291,7 @@ class CutOrPad(object):
                 pad_shape = [diff] + tsize[1:]
             tensor = torch.cat((tensor, torch.zeros(pad_shape, dtype=dtype)), dim=0)
         elif diff < 0:
+            # Cut
             if self.random_sample:
                 return tensor[self.random_subseq(seq_len)]
             elif self.from_start:

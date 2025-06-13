@@ -59,9 +59,9 @@ if __name__ == "__main__":
         img = img[idx]
         doy = doy[idx]
         unfolded_images = unfold_reshape(torch.tensor(img), HWout).numpy()
-        unfolded_labels = unfold_reshape(torch.tensor(lab), HWout).numpy()
+        unfolded_labels = unfold_reshape(torch.tensor(lab.astype(float)), HWout).numpy()
 
-        for j in unfolded_images.shape[0]:
+        for j in range(unfolded_images.shape[0]):
             sample = {'img': unfolded_images[j], 'labels': unfolded_labels[j], 'doy': doy}
 
             with open(os.path.join(savedir, "%d_%d.pickle" % (meta_patch['ID_PATCH'].iloc[i], j)), "wb") as output_file:
