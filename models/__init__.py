@@ -25,7 +25,10 @@ def get_model(config, device):
         return TSViTcls(model_config).to(device)
 
     if model_config['architecture'] == "TSViT":
-        return TSViT(model_config).to(device)
+        return TSViT(model_config, shift_input=False).to(device)
+
+    if model_config['architecture'] == "TSViT-ShiftNet":
+        return TSViT(model_config, shift_input=True).to(device)
 
     else:
         raise NameError("Model architecture %s not found, choose from: 'UNET3D', 'UNET3Df', 'UNET2D-CLSTM', 'TSViT', 'TSViTcls'")

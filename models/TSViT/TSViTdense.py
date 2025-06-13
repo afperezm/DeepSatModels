@@ -6,6 +6,7 @@ from einops.layers.torch import Rearrange
 from models.TSViT.module import Attention, PreNorm, FeedForward
 import numpy as np
 from utils.config_files_utils import get_params_values
+from src.backbones.utae import ShiftResNet18
 
 
 class Transformer(nn.Module):
@@ -368,7 +369,7 @@ class TSViT(nn.Module):
     For improved training speed, this implementation uses a (365 x dim) temporal position encodings indexed for
     each day of the year. Use TSViT_lookup for a slower, yet more general implementation of lookup position encodings
     """
-    def __init__(self, model_config):
+    def __init__(self, model_config, shift_input=False):
         super().__init__()
         self.image_size = model_config['img_res']
         self.patch_size = model_config['patch_size']
@@ -390,9 +391,13 @@ class TSViT(nn.Module):
         self.emb_dropout = model_config['emb_dropout']
         self.pool = model_config['pool']
         self.scale_dim = model_config['scale_dim']
+        self.shift_input = shift_input
         assert self.pool in {'cls', 'mean'}, 'pool type must be either cls (cls token) or mean (mean pooling)'
         num_patches = self.num_patches_1d ** 2
         patch_dim = (model_config['num_channels'] - 1) * self.patch_size ** 2  # -1 is set to exclude time feature
+        if self.shift_input:
+            self.input_shift_block = ShiftResNet18(num_channels=1, backbone='imagenet', interpolation_mode='bicubic', pad_value=0.0)
+
         self.to_patch_embedding = nn.Sequential(
             Rearrange('b t c (h p1) (w p2) -> (b h w) t (p1 p2 c)', p1=self.patch_size, p2=self.patch_size),
             nn.Linear(patch_dim, self.dim),)
@@ -410,11 +415,16 @@ class TSViT(nn.Module):
 
     def forward(self, x):
         x = x.permute(0, 1, 4, 2, 3)
+
         B, T, C, H, W = x.shape
 
         xt = x[:, :, -1, 0, 0]
         x = x[:, :, :-1]
         xt = (xt * 365.0001).to(torch.int64)
+
+        if self.shift_input:
+            x = self.input_shift_block.smart_forward_input(x, dates=xt)
+
         xt = F.one_hot(xt, num_classes=366).to(torch.float32)
 
         xt = xt.reshape(-1, 366)
