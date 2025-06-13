@@ -183,6 +183,11 @@ def train_and_evaluate(net, dataloaders, config, device, lin_cls=False):
 
         scheduler.step_update(abs_step)
 
+    test_metrics = evaluate(net, dataloaders['test'], loss_fn, config)
+
+    write_mean_summaries(writer, test_metrics[1]['micro'], abs_step, mode="test_micro", optimizer=None)
+    write_mean_summaries(writer, test_metrics[1]['macro'], abs_step, mode="test_macro", optimizer=None)
+    write_class_summaries(writer, [test_metrics[0], test_metrics[1]['class']], abs_step, mode="test", optimizer=None)
 
 
 if __name__ == "__main__":
