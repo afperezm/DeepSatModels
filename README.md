@@ -27,7 +27,7 @@ For the initial setup, please follow the instructions for downloading and instal
 
 3. **PyTorch Installation**: Install the required version of PyTorch along with torchvision and torchaudio by running:
 
-        conda install pytorch torchvision torchaudio cudatoolkit=10.1 -c pytorch-nightly
+        conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
 
 
 ## Experiment Setup
