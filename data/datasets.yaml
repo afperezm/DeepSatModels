@@ -1,8 +1,8 @@
 MTLCC:
-    basedir: "..."
-    paths_train: ".../240pkl/train_paths.csv"
-    paths_eval: ".../240pkl/eval_paths.csv"
-    paths_test: ".../240pkl/eval_paths.csv"
+    basedir: "/home/perezmaf/data/mtlcc-dataset"
+    paths_train: "/home/perezmaf/data/mtlcc-dataset/data_IJGI18/datasets/full/240pkl/train_paths.csv"
+    paths_eval: "/home/perezmaf/data/mtlcc-dataset/data_IJGI18/datasets/full/240pkl/eval_paths.csv"
+    paths_test: "/home/perezmaf/data/mtlcc-dataset/data_IJGI18/datasets/full/240pkl/test_paths.csv"
 
 T31TFM_1618:
     basedir: "..."
