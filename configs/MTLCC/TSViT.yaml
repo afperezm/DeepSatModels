@@ -2,7 +2,7 @@ MODEL:
   architecture:  "TSViT"
   img_res: 24
   max_seq_len: 16  #
-  num_channels: 14
+  num_channels: 15
   num_features: 16
   num_classes: 17  # 18
   ignore_background: True
