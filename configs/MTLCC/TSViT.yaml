@@ -30,6 +30,12 @@ DATASETS:
     batch_size: 32
     extra_data:
     num_workers: 4
+  test:
+    dataset: "MTLCC"
+    max_seq_len: 16
+    batch_size: 32
+    extra_data:
+    num_workers: 4
 
 SOLVER:
   num_epochs: 150

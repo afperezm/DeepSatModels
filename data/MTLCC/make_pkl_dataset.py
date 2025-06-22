@@ -52,20 +52,24 @@ def tfrec2pickle(paths, rootdir):
     return np.array(files_saved)
 
 
-def split_data_paths(pkl_paths, train_ids_file, eval_ids_file, rootdir):
+def split_data_paths(pkl_paths, train_ids_file, eval_ids_file, test_ids_file, rootdir):
     get_id = lambda s: s.split("/")[-1].split(".")[0]
 
     eval_ids = pd.read_csv(eval_ids_file, header=None)
     train_ids = pd.read_csv(train_ids_file, header=None)
+    test_ids = pd.read_csv(test_ids_file, header=None)
 
     pkl_paths[1] = pkl_paths[0].apply(get_id)
 
     train_paths = pkl_paths[pkl_paths[1].isin(train_ids[0].astype(str))][0]
     eval_paths = pkl_paths[pkl_paths[1].isin(eval_ids[0].astype(str))][0]
+    test_paths = pkl_paths[pkl_paths[1].isin(test_ids[0].astype(str))][0]
 
     train_paths.to_csv(os.path.join(rootdir, "data_IJGI18/datasets/full/240pkl/train_paths.csv"),
                        header=None, index=False)
     eval_paths.to_csv(os.path.join(rootdir, "data_IJGI18/datasets/full/240pkl/eval_paths.csv"),
+                      header=None, index=False)
+    test_paths.to_csv(os.path.join(rootdir, "data_IJGI18/datasets/full/240pkl/test_paths.csv"),
                       header=None, index=False)
 
 
@@ -98,4 +102,4 @@ if __name__ == "__main__":
     test_ids_file = os.path.join(opt.rootdir, "data_IJGI18/datasets/full/240/tileids/test_fold0.tileids")
     train_ids_file = os.path.join(opt.rootdir, "data_IJGI18/datasets/full/240/tileids/train_fold0.tileids")
 
-    split_data_paths(pkl_paths, train_ids_file, eval_ids_file, opt.rootdir)
+    split_data_paths(pkl_paths, train_ids_file, eval_ids_file, test_ids_file, opt.rootdir)
