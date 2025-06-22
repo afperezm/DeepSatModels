@@ -80,42 +80,37 @@ S2TS4GR_fold5:
 
 # MASS ROADS TS benchmark -------------------------------------------------------------------------------------------------
 S2TS4MR_fold1:
-    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
-    reference_date: "2018-01-01"
-    image_shape: "192,192"
-    paths_train: "1,2,3"
-    paths_eval: "4"
-    paths_test: "5"
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl"
+    paths_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/folds_123.csv"
+    paths_eval: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_4.csv"
+    paths_test: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_5.csv"
+    stats_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-stats/folds_123.json"
 
 S2TS4MR_fold2:
-    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
-    reference_date: "2018-01-01"
-    image_shape: "192,192"
-    paths_train: "2,3,4"
-    paths_eval: "5"
-    paths_test: "1"
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl"
+    paths_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/folds_234.csv"
+    paths_eval: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_5.csv"
+    paths_test: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_1.csv"
+    stats_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-stats/folds_234.json"
 
 S2TS4MR_fold3:
-    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
-    reference_date: "2018-01-01"
-    image_shape: "192,192"
-    paths_train: "3,4,5"
-    paths_eval: "1"
-    paths_test: "2"
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl"
+    paths_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/folds_345.csv"
+    paths_eval: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_1.csv"
+    paths_test: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_2.csv"
+    stats_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-stats/folds_345.json"
 
 S2TS4MR_fold4:
-    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
-    reference_date: "2018-01-01"
-    image_shape: "192,192"
-    paths_train: "4,5,1"
-    paths_eval: "2"
-    paths_test: "3"
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl"
+    paths_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/folds_451.csv"
+    paths_eval: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_2.csv"
+    paths_test: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_3.csv"
+    stats_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-stats/folds_451.json"
 
 S2TS4MR_fold5:
-    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
-    reference_date: "2018-01-01"
-    image_shape: "192,192"
-    paths_train: "5,1,2"
-    paths_eval: "3"
-    paths_test: "4"
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl"
+    paths_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/folds_512.csv"
+    paths_eval: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_3.csv"
+    paths_test: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-paths/fold_4.csv"
+    stats_train: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads_pkl/fold-stats/folds_512.json"
 # ------------------------------------------------------------------------------------------------------------------
