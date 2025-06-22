@@ -40,3 +40,87 @@ PASTIS24_fold5:
     paths_eval: "/home/perezmaf/data/PASTIS24/fold-paths/fold_3_paths.csv"
     paths_test: "/home/perezmaf/data/PASTIS24/fold-paths/fold_4_paths.csv"
 # ------------------------------------------------------------------------------------------------------------------
+
+# GILLAM ROADS benchmark -------------------------------------------------------------------------------------------------
+S2TS4GR_fold1:
+    basedir: "/home/perezmaf/data/northern-cities/gillam_roads_2020_250_10"
+    reference_date: "2020-01-01"
+    image_shape: "256,256"
+    paths_train: "1,2,3"
+    paths_eval: "4"
+    paths_test: "5"
+
+S2TS4GR_fold2:
+    basedir: "/home/perezmaf/data/northern-cities/gillam_roads_2020_250_10"
+    reference_date: "2020-01-01"
+    image_shape: "256,256"
+    paths_train: "2,3,4"
+    paths_eval: "5"
+    paths_test: "1"
+
+S2TS4GR_fold3:
+    basedir: "/home/perezmaf/data/northern-cities/gillam_roads_2020_250_10"
+    reference_date: "2020-01-01"
+    image_shape: "256,256"
+    paths_train: "3,4,5"
+    paths_eval: "1"
+    paths_test: "2"
+
+S2TS4GR_fold4:
+    basedir: "/home/perezmaf/data/northern-cities/gillam_roads_2020_250_10"
+    reference_date: "2020-01-01"
+    image_shape: "256,256"
+    paths_train: "4,5,1"
+    paths_eval: "2"
+    paths_test: "3"
+
+S2TS4GR_fold5:
+    basedir: "/home/perezmaf/data/northern-cities/gillam_roads_2020_250_10"
+    reference_date: "2020-01-01"
+    image_shape: "256,256"
+    paths_train: "5,1,2"
+    paths_eval: "3"
+    paths_test: "4"
+# ------------------------------------------------------------------------------------------------------------------
+
+# MASS ROADS TS benchmark -------------------------------------------------------------------------------------------------
+S2TS4MR_fold1:
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
+    reference_date: "2018-01-01"
+    image_shape: "192,192"
+    paths_train: "1,2,3"
+    paths_eval: "4"
+    paths_test: "5"
+
+S2TS4MR_fold2:
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
+    reference_date: "2018-01-01"
+    image_shape: "192,192"
+    paths_train: "2,3,4"
+    paths_eval: "5"
+    paths_test: "1"
+
+S2TS4MR_fold3:
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
+    reference_date: "2018-01-01"
+    image_shape: "192,192"
+    paths_train: "3,4,5"
+    paths_eval: "1"
+    paths_test: "2"
+
+S2TS4MR_fold4:
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
+    reference_date: "2018-01-01"
+    image_shape: "192,192"
+    paths_train: "4,5,1"
+    paths_eval: "2"
+    paths_test: "3"
+
+S2TS4MR_fold5:
+    basedir: "/home/perezmaf/data/massachusetts-ts-dataset/mass_roads"
+    reference_date: "2018-01-01"
+    image_shape: "192,192"
+    paths_train: "5,1,2"
+    paths_eval: "3"
+    paths_test: "4"
+# ------------------------------------------------------------------------------------------------------------------
