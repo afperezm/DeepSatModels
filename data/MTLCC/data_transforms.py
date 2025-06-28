@@ -550,3 +550,22 @@ class AddCSSLLabels(object):
         sample['sameclass_labels'] = is_same
 
         return sample
+
+
+class UnpackInputs(object):
+
+    def __call__(self, sample):
+        data = sample['inputs'][..., :-2].permute(0, 3, 1, 2)  # T H W C --> T C H W
+
+        days = sample['inputs'][..., 0, 0, -2]
+        days = (days * 365.0001).to(torch.int64)
+        # years = sample['inputs'][..., 0, 0, -1]
+        # years = (years * 366).to(torch.int64)
+        # dates = years + days
+        dates = days
+
+        target = sample['labels']
+        # target = target.permute(2, 0, 1)  # H W C --> C H W
+        target = target.squeeze()
+
+        return (data, dates), target
