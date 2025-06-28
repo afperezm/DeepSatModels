@@ -1,3 +1,4 @@
+import os
 import torch
 from data.MTLCC.dataloader import get_dataloader as get_mtlcc_dataloader
 from data.MTLCC.data_transforms import MTLCC_transform
@@ -8,7 +9,7 @@ from data.PASTIS24.data_transforms import PASTIS_segmentation_transform
 from utils.config_files_utils import get_params_values, read_yaml
 
 
-DATASET_INFO = read_yaml("data/datasets.yaml")
+DATASET_INFO = read_yaml(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'datasets.yaml'))
 
 
 def get_dataloaders(config):
