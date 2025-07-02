@@ -6,6 +6,8 @@ from data.France.dataloader import get_dataloader as get_france_dataloader
 from data.France.data_transforms import France_segmentation_transform
 from data.PASTIS24.dataloader import get_dataloader as get_pastis_dataloader
 from data.PASTIS24.data_transforms import PASTIS_segmentation_transform
+from data.S2TS.dataloader import get_dataloader as get_s2ts_dataloader
+from data.S2TS.data_transforms import S2TS_segmentation_transform
 from utils.config_files_utils import get_params_values, read_yaml
 
 
@@ -37,6 +39,12 @@ def get_dataloaders(config):
             paths_file=train_config['paths'], root_dir=train_config['base_dir'],
             transform=PASTIS_segmentation_transform(model_config, is_training=True),
             batch_size=train_config['batch_size'], shuffle=True, num_workers=train_config['num_workers'])
+    elif 'S2TS' in train_config['dataset']:
+        stats_file = train_config['paths'].replace('fold-paths', 'fold-stats').replace('.csv', '.json')
+        dataloaders['train'] = get_s2ts_dataloader(
+            paths_file=train_config['paths'], root_dir=train_config['base_dir'],
+            transform=S2TS_segmentation_transform(model_config, stats_file=stats_file, is_training=True),
+            batch_size=train_config['batch_size'], shuffle=True, num_workers=train_config['num_workers'])
     else:
         dataloaders['train'] = get_france_dataloader(
             paths_file=train_config['paths'], root_dir=train_config['base_dir'],
@@ -56,6 +64,12 @@ def get_dataloaders(config):
             paths_file=eval_config['paths'], root_dir=eval_config['base_dir'],
             transform=PASTIS_segmentation_transform(model_config, is_training=False),
             batch_size=eval_config['batch_size'], shuffle=False, num_workers=eval_config['num_workers'])
+    elif 'S2TS' in train_config['dataset']:
+        stats_file = eval_config['paths'].replace('fold-paths', 'fold-stats').replace('.csv', '.json')
+        dataloaders['eval'] = get_s2ts_dataloader(
+            paths_file=eval_config['paths'], root_dir=eval_config['base_dir'],
+            transform=S2TS_segmentation_transform(model_config, stats_file=stats_file, is_training=False),
+            batch_size=eval_config['batch_size'], shuffle=False, num_workers=eval_config['num_workers'])
     else:
         dataloaders['eval'] = get_france_dataloader(
             paths_file=eval_config['paths'], root_dir=eval_config['base_dir'],
@@ -74,6 +88,12 @@ def get_dataloaders(config):
         dataloaders['test'] = get_pastis_dataloader(
             paths_file=test_config['paths'], root_dir=test_config['base_dir'],
             transform=PASTIS_segmentation_transform(model_config, is_training=False),
+            batch_size=test_config['batch_size'], shuffle=False, num_workers=test_config['num_workers'])
+    elif 'S2TS' in train_config['dataset']:
+        stats_file = test_config['paths'].replace('fold-paths', 'fold-stats').replace('.csv', '.json')
+        dataloaders['test'] = get_s2ts_dataloader(
+            paths_file=test_config['paths'], root_dir=test_config['base_dir'],
+            transform=S2TS_segmentation_transform(model_config, stats_file=stats_file, is_training=False),
             batch_size=test_config['batch_size'], shuffle=False, num_workers=test_config['num_workers'])
     else:
         dataloaders['test'] = get_france_dataloader(
