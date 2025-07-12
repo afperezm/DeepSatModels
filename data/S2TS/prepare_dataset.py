@@ -10,7 +10,7 @@ import pickle as pkl
 from itertools import chain
 from tqdm import tqdm
 
-from src.dataset import load_patch, load_target
+from src.datasets.pastis import load_patch, load_target
 from data.PASTIS24.data2windows import get_doy, unfold_reshape
 
 PARAMS = None

@@ -6,7 +6,7 @@ from einops.layers.torch import Rearrange
 from models.TSViT.module import Attention, PreNorm, FeedForward
 import numpy as np
 from utils.config_files_utils import get_params_values
-from src.backbones.utae import ShiftResNet18
+from src.backbones.shiftnet import ShiftResNet18
 
 
 class Transformer(nn.Module):
