@@ -22,7 +22,7 @@ import torch
 sys.path.insert(0, os.getcwd())
 
 
-def test(net, eval_loader, loss_fn, num_classes, device):
+def test(eval_loader, net, device, loss_input_fn, loss_fn, num_classes):
     predicted_all = []
     labels_all = []
     losses_all = []
@@ -95,16 +95,12 @@ def main():
 
     net = get_model(config, device)
 
-    lr = float(config['SOLVER']['lr_base'])
     save_path = config['CHECKPOINT']["save_path"]
     checkpoint = config['CHECKPOINT']["load_from_checkpoint"]
     local_device_ids = config['local_device_ids']
     num_classes = config['MODEL']['num_classes']
 
-    if checkpoint:
-        load_from_checkpoint(net, checkpoint, partial_restore=False)
-
-    print("current learn rate: ", lr)
+    load_from_checkpoint(net, checkpoint, partial_restore=False)
 
     if len(local_device_ids) > 1:
         net = nn.DataParallel(net, device_ids=local_device_ids)
@@ -113,16 +109,12 @@ def main():
     if save_path and (not os.path.exists(save_path)):
         os.makedirs(save_path)
 
-    copy_yaml(config)
+    loss_input_fn = get_loss_data_input(config)
 
     loss_fn = {'all': get_loss(config, device, reduction=None),
                'mean': get_loss(config, device, reduction="mean")}
 
-    test_metrics = test(net, dataloaders['test'], loss_fn, num_classes, device)
-
-    # write_mean_summaries(writer, test_metrics[1]['micro'], abs_step, mode="test_micro", optimizer=None)
-    # write_mean_summaries(writer, test_metrics[1]['macro'], abs_step, mode="test_macro", optimizer=None)
-    # write_class_summaries(writer, [test_metrics[0], test_metrics[1]['class']], abs_step, mode="test", optimizer=None)
+    _ = test(dataloaders['test'], net, device, loss_input_fn, loss_fn, num_classes)
 
 
 def parse_args():
