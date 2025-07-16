@@ -22,7 +22,7 @@ import torch
 sys.path.insert(0, os.getcwd())
 
 
-def test(net, eval_loader, loss_fn, num_classes):
+def test(net, eval_loader, loss_fn, num_classes, device):
     predicted_all = []
     labels_all = []
     losses_all = []
@@ -118,7 +118,7 @@ def main():
     loss_fn = {'all': get_loss(config, device, reduction=None),
                'mean': get_loss(config, device, reduction="mean")}
 
-    test_metrics = test(net, dataloaders['test'], loss_fn, num_classes)
+    test_metrics = test(net, dataloaders['test'], loss_fn, num_classes, device)
 
     # write_mean_summaries(writer, test_metrics[1]['micro'], abs_step, mode="test_micro", optimizer=None)
     # write_mean_summaries(writer, test_metrics[1]['macro'], abs_step, mode="test_macro", optimizer=None)
