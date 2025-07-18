@@ -96,7 +96,7 @@ def main():
     net = get_model(config, device)
 
     save_path = config['CHECKPOINT']["save_path"]
-    checkpoint = config['CHECKPOINT']["load_from_checkpoint"]
+    checkpoint = args.checkpoint
     local_device_ids = config['local_device_ids']
     num_classes = config['MODEL']['num_classes']
 
@@ -119,8 +119,9 @@ def main():
 
 def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
-    parser.add_argument('--config', help='configuration (.yaml) file to use')
-    parser.add_argument('--device', default='0,1', type=str, help='gpu ids to use')
+    parser.add_argument('--config', help='configuration (.yaml) file to use', required=True)
+    parser.add_argument('--device', help='gpu ids to use', default='0,1')
+    parser.add_argument('--checkpoint', help='Path to the model to be tested', required=True)
     return parser.parse_args()
 
 
