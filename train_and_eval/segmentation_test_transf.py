@@ -91,6 +91,9 @@ def main():
     config = read_yaml(config_file)
     config['local_device_ids'] = device_ids
 
+    if args.model:
+        config['MODEL']['architecture'] = args.model
+
     dataloaders = get_dataloaders(config)
 
     net = get_model(config, device)
@@ -121,6 +124,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
     parser.add_argument('--config', help='configuration (.yaml) file to use', required=True)
     parser.add_argument('--device', help='gpu ids to use', default='0,1')
+    parser.add_argument('--model', help='Architecture of the model to be tested')
     parser.add_argument('--checkpoint', help='Path to the model to be tested', required=True)
     return parser.parse_args()
 
